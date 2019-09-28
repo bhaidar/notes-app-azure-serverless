@@ -58,20 +58,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.notes-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.notes-container__list {
-  width: 250px;
-  background: #333744;
-  flex-shrink: 0;
-}
-
-.notes-container__create {
-  flex-grow: 1;
-  display: flex;
-}
+<style lang="scss" scoped>
+@import "../styles/components/notes.scss";
 </style>

@@ -19,19 +19,22 @@ import marked from 'marked';
 import _ from 'lodash';
 
 export default {
-  data () {
-    return {
-      content: ''
+  props: {
+    note: {
+      type: String
     }
   },
   computed: {
     compiledMarkdown () {
-      return marked(this.content);
+      return this.content ? marked(this.content) : '';
+    },
+    content () {
+      return this.note;
     }
   },
   methods: {
     update: _.debounce(function (e) {
-      this.content = e.target.value
+      this.$emit('note-content-change', e.target.value);
     }, 300)
   }
 }

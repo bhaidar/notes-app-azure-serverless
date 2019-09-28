@@ -1,5 +1,8 @@
 <template>
-  <div class="notes__item">
+  <div
+    class="notes__item"
+    @click.prevent="selectNote"
+  >
     <h4>{{ title }}</h4>
     <p class="note-body">{{ body }}</p>
   </div>
@@ -13,6 +16,11 @@ export default {
     },
     body: {
       type: String
+    }
+  },
+  methods: {
+    selectNote () {
+      this.$emit('select-note', this.body);
     }
   }
 }

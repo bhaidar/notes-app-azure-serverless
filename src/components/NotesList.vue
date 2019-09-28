@@ -1,11 +1,17 @@
 <template>
   <div class="notes">
-    <button class="btn btn-new-note">Save Note</button>
-    <div class="notes__items">
+    <button
+      class="btn btn-new-note"
+      @click="saveNewNote"
+    >Save Note</button>
+    <div class="
+      notes__items">
       <Note
         v-for="(note, index) in notes"
         :key="index"
         v-bind="note"
+        class="select-note"
+        @select-note="selectNote($event, note)"
       ></Note>
     </div>
   </div>
@@ -21,6 +27,14 @@ export default {
   },
   components: {
     Note
+  },
+  methods: {
+    saveNewNote () {
+      this.$emit('save-note');
+    },
+    selectNote ($event, note) {
+      this.$emit('select-note', note.body);
+    }
   }
 }
 </script>
@@ -53,5 +67,14 @@ export default {
 .btn-new-note {
   margin: 16px;
   align-self: center;
+}
+
+.select-note {
+  cursor: pointer;
+}
+
+.select-note:hover {
+  transition: background 0.3s ease;
+  background: #6e7491;
 }
 </style>

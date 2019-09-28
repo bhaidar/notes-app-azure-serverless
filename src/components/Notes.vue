@@ -3,8 +3,14 @@
     <NotesList
       :notes="notes"
       class="notes-container__list"
+      @save-note="saveNote"
+      @select-note="selectNote"
     ></NotesList>
-    <NotesCreate class="notes-container__create"></NotesCreate>
+    <NotesCreate
+      :note="currentNote"
+      @note-content-change="noteContentChanged"
+      class="notes-container__create"
+    ></NotesCreate>
   </div>
 </template>
 
@@ -16,7 +22,8 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      notes: []
+      notes: [],
+      currentNote: null
     }
   },
   components: {
@@ -28,6 +35,25 @@ export default {
       .then(response => {
         this.notes = response.data.map(note => note.data);
       });
+  },
+  methods: {
+    selectNote (note) {
+      this.currentNote = note;
+    },
+    noteContentChanged (note) {
+      this.currentNote = note;
+    },
+    saveNote () {
+      const note = {
+        title: this.currentNote.substring(0, 25),
+        body: this.currentNote
+      };
+
+      axios.post('http://localhost:7071/api/notes-create', note).then(() => {
+        this.notes.push(note);
+        this.currentNote = null;
+      });
+    }
   }
 }
 </script>

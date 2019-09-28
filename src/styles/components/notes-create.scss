@@ -1,0 +1,48 @@
+.editor {
+  margin: 0;
+  padding: 0;
+  
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+
+  height: 100vh;
+
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    flex: 1;
+  }
+
+  &__md {
+    border-right: 1px solid #ccc;
+    padding: 20px;
+    background-color: #f6f6f6;
+
+    textarea {
+      border: none;
+      resize: none;
+      outline: none;
+      background-color: #f6f6f6;
+      font-size: 1rem;
+      font-family: 'Monaco', courier, monospace;
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  &__compiled-md {
+    max-height: 100vh;
+    width: 100%;
+    overflow: auto;
+    padding: 0 20px;
+
+    > div {
+      height: 100%;
+      width: 100%;
+      text-align: left;
+    }
+  }
+}
